@@ -1,0 +1,286 @@
+{
+  "status": "INCOMPLETE",
+  "missing_confirmatory_cells": [
+    [
+      "gru",
+      "fast_first",
+      0
+    ],
+    [
+      "gru",
+      "fast_first",
+      1
+    ],
+    [
+      "gru",
+      "fast_first",
+      2
+    ],
+    [
+      "gru",
+      "fast_first",
+      3
+    ],
+    [
+      "gru",
+      "shuffled",
+      0
+    ],
+    [
+      "gru",
+      "shuffled",
+      1
+    ],
+    [
+      "gru",
+      "shuffled",
+      2
+    ],
+    [
+      "gru",
+      "shuffled",
+      3
+    ],
+    [
+      "gru",
+      "slow_first",
+      0
+    ],
+    [
+      "gru",
+      "slow_first",
+      1
+    ],
+    [
+      "gru",
+      "slow_first",
+      2
+    ],
+    [
+      "gru",
+      "slow_first",
+      3
+    ],
+    [
+      "rnn",
+      "fast_first",
+      0
+    ],
+    [
+      "rnn",
+      "fast_first",
+      1
+    ],
+    [
+      "rnn",
+      "fast_first",
+      2
+    ],
+    [
+      "rnn",
+      "fast_first",
+      3
+    ],
+    [
+      "rnn",
+      "shuffled",
+      0
+    ],
+    [
+      "rnn",
+      "shuffled",
+      1
+    ],
+    [
+      "rnn",
+      "shuffled",
+      2
+    ],
+    [
+      "rnn",
+      "shuffled",
+      3
+    ],
+    [
+      "rnn",
+      "slow_first",
+      0
+    ],
+    [
+      "rnn",
+      "slow_first",
+      1
+    ],
+    [
+      "rnn",
+      "slow_first",
+      2
+    ],
+    [
+      "rnn",
+      "slow_first",
+      3
+    ]
+  ],
+  "encoder_rows": [
+    {
+      "kind": "gru",
+      "curriculum": "natural",
+      "encoder_seed": 0,
+      "n_policy_seeds": 1,
+      "final_success": 0.0625,
+      "final_spl": 0.05450575346728831,
+      "final_progress": -0.2929444065481379,
+      "success_auc": 0.04111328125,
+      "policy_seed_success_sd": 0.0,
+      "source_sha256": [
+        "d6f8ebdca9d3333c972351c978b8ea138878a73929a7cc7c217f42ad6f67c93c"
+      ],
+      "development": {
+        "appearance": {
+          "step": 8,
+          "asymptote": 0.9461
+        },
+        "short_gap": {
+          "step": 13,
+          "asymptote": 0.9413
+        },
+        "boundary": {
+          "step": 8,
+          "asymptote": 0.9504
+        },
+        "long_gap": {
+          "step": 37,
+          "asymptote": 0.9373
+        },
+        "heading_decode": {
+          "step": 63,
+          "asymptote": 0.9755
+        },
+        "heading": {
+          "step": 81,
+          "asymptote": 0.6943
+        },
+        "place": {
+          "step": 63,
+          "asymptote": 0.9823
+        },
+        "grid": {
+          "step": null,
+          "asymptote": 0.0
+        }
+      }
+    }
+  ],
+  "comparisons": {
+    "slow_first_vs_fast_first_final_success": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "slow_first_vs_fast_first_success_auc": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "slow_first_vs_fast_first_final_spl": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "slow_first_vs_fast_first_final_progress": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "slow_first_vs_shuffled_final_success": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "slow_first_vs_shuffled_success_auc": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "slow_first_vs_shuffled_final_spl": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "slow_first_vs_shuffled_final_progress": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "fast_first_vs_shuffled_final_success": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "fast_first_vs_shuffled_success_auc": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "fast_first_vs_shuffled_final_spl": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    },
+    "fast_first_vs_shuffled_final_progress": {
+      "n_pairs": 0,
+      "status": "INCOMPLETE",
+      "pairs": []
+    }
+  },
+  "descriptive_relationships": {
+    "heading_decode_step_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    },
+    "heading_decode_asymptote_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    },
+    "heading_step_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    },
+    "heading_asymptote_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    },
+    "place_step_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    },
+    "place_asymptote_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    },
+    "long_gap_step_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    },
+    "long_gap_asymptote_vs_success_auc": {
+      "spearman_approx": null,
+      "n_rows": 1,
+      "inferential": false
+    }
+  },
+  "excluded_primary_contrast": {
+    "pair": [
+      "deprived_early",
+      "deprived_late"
+    ],
+    "reason": "unequal post-deprivation recovery time in source design"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "tag": "gru_natural_s0_p0",
+  "kind": "gru",
+  "curriculum": "natural",
+  "encoder_seed": 0,
+  "policy_seed": 0,
+  "source_checkpoint": "/Users/saanviiyer/Downloads/CALTECH/RESEARCH/neurodev_wm/runs/dev/gru_natural_s0.pt",
+  "source_sha256": "d6f8ebdca9d3333c972351c978b8ea138878a73929a7cc7c217f42ad6f67c93c",
+  "encoder_frozen": true,
+  "pose_policy_input": false,
+  "domain": "rectangle",
+  "updates": 20,
+  "batch": 16,
+  "horizon": 45,
+  "curve": [
+    {
+      "update": 1,
+      "train_success": 0.125,
+      "success": 0.0390625,
+      "spl": 0.03757605194370143,
+      "progress": -0.2829903163311825,
+      "collisions": 31.4921875,
+      "return_proxy": -0.13907920167825455,
+      "n_episodes": 256
+    },
+    {
+      "update": 10,
+      "train_success": 0.0,
+      "success": 0.03515625,
+      "spl": 0.03315065499799545,
+      "progress": -0.28649507465275137,
+      "collisions": 33.70703125,
+      "return_proxy": -0.14927673349900067,
+      "n_episodes": 256
+    },
+    {
+      "update": 20,
+      "train_success": 0.1875,
+      "success": 0.0625,
+      "spl": 0.05450575346728831,
+      "progress": -0.2929444065481379,
+      "collisions": 32.2578125,
+      "return_proxy": -0.11251366319983822,
+      "n_episodes": 256
+    }
+  ],
+  "final": {
+    "update": 20,
+    "train_success": 0.1875,
+    "success": 0.0625,
+    "spl": 0.05450575346728831,
+    "progress": -0.2929444065481379,
+    "collisions": 32.2578125,
+    "return_proxy": -0.11251366319983822,
+    "n_episodes": 256
+  },
+  "success_auc": 0.04111328125
+}

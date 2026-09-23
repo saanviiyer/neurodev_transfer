@@ -1,0 +1,30 @@
+{
+  "source_project": "../neurodev_wm",
+  "source_checkpoint_dir": "../neurodev_wm/runs/dev",
+  "source_development_analysis": "../neurodev_wm/runs/development.json",
+  "curricula": ["slow_first", "fast_first", "shuffled"],
+  "architectures": ["gru", "rnn"],
+  "encoder_seeds": [0, 1, 2, 3],
+  "policy_seeds": [0, 1, 2],
+  "policy": {
+    "updates": 1000,
+    "batch": 128,
+    "horizon": 45,
+    "evaluation_every": 10,
+    "evaluation_episodes": 256,
+    "frozen_encoder": true,
+    "pose_policy_input": false
+  },
+  "primary_metrics": ["final_success", "success_auc"],
+  "inference_unit": "architecture_encoder_seed",
+  "policy_seed_aggregation": "mean_within_encoder",
+  "primary_contrasts": [
+    ["slow_first", "fast_first"],
+    ["slow_first", "shuffled"],
+    ["fast_first", "shuffled"]
+  ],
+  "excluded_primary_contrast": {
+    "pair": ["deprived_early", "deprived_late"],
+    "reason": "unequal post-deprivation recovery time in source design"
+  }
+}
