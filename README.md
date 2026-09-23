@@ -1,58 +1,26 @@
 # Functional transfer from developmental world-model curricula
 
-This is a read-only extension of `../neurodev_wm`. It asks whether the
-representations produced by different developmental experience schedules have
-different functional value when a new policy must learn from reward.
+This project extends `neurodev_wm` and only reads from it. `neurodev_wm` trains world models under different schedules of experience and measures when each capability emerges. This project freezes those world models and asks a follow-up question. Does the order of a model's earlier experience change how fast a pose-free navigation policy learns from reward on top of it?
 
-The developmental project measures *when* capabilities emerge. This extension
-asks a separate question: **after the world model is frozen, does the order of
-its earlier experience change how quickly a pose-free navigation policy
-learns?**
+No file in `neurodev_wm` is changed. Its checkpoints and `runs/development.json` are inputs. The arena, the world-model classes and the reward-only actor-critic are imported from `robowomo-attractors`, with no copies.
 
-No file in `neurodev_wm` is modified. Its checkpoints and
-`runs/development.json` are inputs. The arena, world-model classes, and
-reward-only actor--critic are imported from `robowomo-attractors` rather than
-copied.
+## Why a separate project
 
-## Why this is complementary
+`neurodev_wm` already covers emergence order, deprivation timing, seed scaling and the label-free heading measure. A second copy of those analyses would give two sources of truth. Functional transfer measures a consequence that the developmental battery does not: whether a state shaped by the curriculum helps later embodied learning.
 
-The active developmental work already owns emergence ordering, deprivation
-timing, seed scaling, and the label-free heading instrument. Repeating those
-analyses here would create two sources of truth. Functional transfer instead
-supplies a consequence that the developmental battery does not measure:
-whether curriculum-shaped state improves later embodied learning.
+The main causal comparison is between `slow_first`, `fast_first` and `shuffled`. These schedules show the models the same marginal mixture of worlds in different temporal orders. `natural` is a reference, but it does not share that mixture. The `deprived_early` and `deprived_late` pair is not a primary contrast. In the current fixed-budget design, the two conditions have unequal recovery time after deprivation.
 
-The clean causal comparison is `slow_first` versus `fast_first` versus
-`shuffled`. These schedules expose models to the same marginal mixture of
-worlds in different temporal orders. `natural` is a useful reference but does
-not share that mixture. `deprived_early` versus `deprived_late` is deliberately
-not a primary transfer contrast because the current fixed-budget design has
-unequal post-deprivation recovery time.
+## Outcomes and unit of inference
 
-## Primary outcomes and unit of inference
+The primary outcomes are final goal success after a fixed actor-critic budget, and the area under the goal-success learning curve.
 
-- Final goal success after a fixed actor--critic budget.
-- Area under the goal-success learning curve.
+The unit of inference is an architecture and encoder-seed pair. Policy seeds are averaged within each encoder before the paired curriculum tests. Episodes and timesteps are not independent samples.
 
-The unit is an architecture--encoder-seed pair. Policy seeds are averaged
-within each encoder before paired curriculum tests. Episodes and timesteps are
-not independent samples.
+The source grid now has three seeds per architecture, so the analysis returns the verdict `MORE_SEEDS`. When `neurodev_wm` adds seed 3, the design has eight architecture and seed pairs. The exact sign-flip test then has a floor of 0.0078125, and the analysis becomes confirmatory without code changes.
 
-The current source grid has three seeds per architecture, so a confirmatory
-verdict is `MORE_SEEDS`. The analysis becomes confirmatory automatically when
-the other project adds seed 3, producing eight architecture--seed pairs and an
-exact sign-flip floor of 0.0078125.
+## Run
 
-## Layout
-
-    src/links.py              read-only imports and source-path validation
-    src/train_transfer.py     policy learning on frozen developmental states
-    src/analyze_transfer.py   encoder-level aggregation and paired tests
-    configs/confirmatory.json frozen matrix and claim gates
-    tests/                    tag, aggregation, and completeness invariants
-    runs/                     extension-owned outputs only
-
-## Smoke test
+Smoke test:
 
 ```bash
 PYTHONPATH=src python3 -m pytest -q
@@ -66,9 +34,7 @@ PYTHONPATH=src python3 src/analyze_transfer.py \
   --output runs/smoke_analysis.json --allow-incomplete
 ```
 
-## Confirmatory run
-
-Run three policy seeds for the order-matched curriculum trio:
+Confirmatory run, with three policy seeds for the order-matched curricula:
 
 ```bash
 for curriculum in slow_first fast_first shuffled; do
@@ -84,19 +50,25 @@ PYTHONPATH=src python3 src/analyze_transfer.py \
   --output runs/transfer_analysis.json
 ```
 
-If seed 3 is not yet present in `neurodev_wm/runs/dev`, the training command
-will fail with a missing-cell report instead of silently reducing the design.
+If seed 3 is missing from `neurodev_wm/runs/dev`, the training command stops with a report of the missing cells. It does not shrink the design without warning.
 
-## Claim discipline
+The code expects `neurodev_wm` and `robowomo-attractors` as sibling folders. See `src/links.py` and `configs/confirmatory.json` for the paths.
 
-- Say **functional transfer from simulated curricula**, not development in a
-  biological organism.
-- Say **reward-only policy learning on a frozen representation**, not joint
-  end-to-end reinforcement learning.
-- Treat emergence-policy correlations as descriptive unless a separate
-  clustered inferential design is preregistered.
-- Do not interpret the current early/late deprivation endpoint; recovery time
-  is confounded in the source experiment.
-- Do not merge this result into the parent ICLR manuscript unless the visual
-  replication and core claim remain clear within the page budget. It may be a
-  better follow-on paper or appendix analysis.
+## Layout
+
+    src/links.py              read-only imports and source-path checks
+    src/train_transfer.py     policy learning on frozen developmental states
+    src/analyze_transfer.py   encoder-level aggregation and paired tests
+    configs/confirmatory.json frozen design matrix and claim gates
+    tests/                    tag, aggregation and completeness invariants
+    runs/                     outputs of this project only (smoke run so far)
+
+Policy checkpoints (`*.pt`) are not in the repository.
+
+## Limits on claims
+
+- The result is functional transfer from simulated curricula. It says nothing about development in a biological organism.
+- The policy learns from reward on a frozen representation. The setup is not joint end-to-end reinforcement learning.
+- Correlations between emergence times and policy results are descriptive, unless a separate clustered inferential design is preregistered.
+- The early and late deprivation endpoint is not interpreted, because recovery time is confounded in the source experiment.
+- This result may suit a follow-on paper or an appendix analysis better than the parent manuscript.
